@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'User',
     'CurriculumVitae',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'rest_authtoken',
     'django.contrib.admin',
@@ -132,3 +133,6 @@ REST_FRAMEWORK = {
         'rest_authtoken.auth.AuthTokenAuthentication',
     ),
 }
+
+AUTH_USER_MODEL = 'User.CustomUser'
+
