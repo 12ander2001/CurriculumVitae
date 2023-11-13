@@ -49,6 +49,22 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3001',
 ]
 
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS',
+]
+
+CORS_ALLOW_HEADERS = [
+    'Accept',
+    'Content-Type',
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 
 ROOT_URLCONF = 'CurriculumDB.urls'
 
@@ -135,4 +151,5 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'User.CustomUser'
+
 

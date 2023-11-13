@@ -7,9 +7,10 @@ class SocialLinks(models.Model):
     nombre = models.CharField(max_length=255)
     url = models.URLField()
 
+
 def get_default_user():
     user = CustomUser.objects.first() 
-    return user
+    return user.id
 
 class ContactInfo(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, default=get_default_user)
@@ -32,20 +33,35 @@ class ContactInfo(models.Model):
     @property
     def user_lastname(self):
         return self.user.lastname
+    
+    
+class CurriculumVitae(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, unique=True, editable=False)
+    description = models.TextField()
+    
+    def __str__(self):
+        return self.user.username
 
 
 class Skills(models.Model):
     name = models.CharField(max_length=255)
     assessment = models.CharField(max_length=255)
+    curriculum = models.ForeignKey(CurriculumVitae, on_delete=models.CASCADE, related_name='skills', default=1)
+
+
 
 class Interests(models.Model):
     name = models.CharField(max_length=255)
+    curriculum = models.ForeignKey(CurriculumVitae, on_delete=models.CASCADE, related_name='interests', default=1)
+
 
 class WorkExperience(models.Model):
     name = models.CharField(max_length=255)
     place = models.CharField(max_length=255)
     range = models.CharField(max_length=255)
     description = models.TextField()
+    curriculum = models.ForeignKey(CurriculumVitae, on_delete=models.CASCADE, related_name='workexperience', default=1)
+
 
 class Education(models.Model):
     nameinst = models.CharField(max_length=255)
@@ -53,15 +69,6 @@ class Education(models.Model):
     range = models.CharField(max_length=255)
     curse = models.CharField(max_length=255)
     description = models.TextField()
+    curriculum = models.ForeignKey(CurriculumVitae, on_delete=models.CASCADE, related_name='educations', default=1)
 
-class CurriculumVitae(models.Model):
-    skills = models.ForeignKey(Skills, on_delete=models.CASCADE)
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, unique=True, editable=False)
-    interest = models.ForeignKey(Interests, on_delete=models.CASCADE)
-    description = models.TextField()
-    workexperience = models.ForeignKey(WorkExperience, on_delete=models.CASCADE)
-    education = models.ForeignKey(Education, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.user.username
 
