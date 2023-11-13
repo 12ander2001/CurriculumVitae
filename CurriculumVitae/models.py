@@ -2,12 +2,6 @@ from django.db import models
 from User.models import CustomUser
 from rest_framework import viewsets
 
-
-class SocialLinks(models.Model):
-    nombre = models.CharField(max_length=255)
-    url = models.URLField()
-
-
 def get_default_user():
     user = CustomUser.objects.first() 
     return user.id
@@ -15,7 +9,6 @@ def get_default_user():
 class ContactInfo(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, default=get_default_user)
     phone = models.CharField(max_length=15)
-    sociallinks = models.ForeignKey(SocialLinks, on_delete=models.CASCADE)
     direccion = models.CharField(max_length=255)
     
     @property
@@ -33,6 +26,11 @@ class ContactInfo(models.Model):
     @property
     def user_lastname(self):
         return self.user.lastname
+    
+class SocialLinks(models.Model):
+    nombre = models.CharField(max_length=255)
+    url = models.URLField()
+    contact_info = models.ForeignKey(ContactInfo, on_delete=models.CASCADE, related_name='social_links', default=1)
     
     
 class CurriculumVitae(models.Model):
