@@ -1,12 +1,23 @@
 from django.http import JsonResponse
 from django.views import View
 from User.models import CustomUser
+from rest_framework.views import APIView
 
 class UserListView(View):
     def get(self, request):
         users = CustomUser.objects.all().values()
         return JsonResponse(list(users), safe=False)
 
+#class ValidateTokenView(APIView):
+  # def get(self, request, format=None):
+   #    token_key = request.META.get('HTTP_AUTHORIZATION').split(' ')[0]
+    #   try: 
+     #      token = Token.objects.get(key=token_key)
+     #      return Response({'valid': True}, status=status.HTTP_200_OK)
+     #  except Token.DoesNotExist:
+      #     return Response({
+      #     'token': token.key,
+      # })
 
 
 from rest_framework.views import APIView
@@ -18,17 +29,17 @@ from rest_framework.authtoken.models import Token
 
 
 class LoginView(APIView):
-    def post(self, request):
-        email = request.data.get('email')
-        password = request.data.get('password')
+  def post(self, request):
+      email = request.data.get('email')
+      password = request.data.get('password')
 
-        user = authenticate(request, email=email, password=password)
+      user = authenticate(request, username=email, password=password)
 
-        if user is not None:
-            token, created = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key})
-        else:
-            return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_400_BAD_REQUEST)
+      if user is not None:
+          token, created = Token.objects.get_or_create(user=user)
+          return Response({'user_id': user.id, 'token': token.key})
+      else:
+          return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RegisterView(APIView):
