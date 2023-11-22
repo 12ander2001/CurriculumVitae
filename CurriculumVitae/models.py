@@ -30,7 +30,7 @@ class ContactInfo(models.Model):
 class SocialLinks(models.Model):
     nombre = models.CharField(max_length=255)
     url = models.URLField()
-    contact_info = models.ForeignKey(ContactInfo, on_delete=models.CASCADE, related_name='social_links', default=1)
+    contact_info = models.ForeignKey(ContactInfo, on_delete=models.CASCADE, related_name='social_links')
     
     
 class CurriculumVitae(models.Model):
@@ -44,13 +44,13 @@ class CurriculumVitae(models.Model):
 class Skills(models.Model):
     name = models.CharField(max_length=255)
     assessment = models.CharField(max_length=255)
-    curriculum = models.ForeignKey(CurriculumVitae, on_delete=models.CASCADE, related_name='skills', default=1)
+    curriculum = models.ForeignKey(CurriculumVitae, on_delete=models.CASCADE, related_name='skills')
 
 
 
 class Interests(models.Model):
     name = models.CharField(max_length=255)
-    curriculum = models.ForeignKey(CurriculumVitae, on_delete=models.CASCADE, related_name='interests', default=1)
+    curriculum = models.ForeignKey(CurriculumVitae, on_delete=models.CASCADE, related_name='interests')
 
 
 class WorkExperience(models.Model):
@@ -58,7 +58,7 @@ class WorkExperience(models.Model):
     place = models.CharField(max_length=255)
     range = models.CharField(max_length=255)
     description = models.TextField()
-    curriculum = models.ForeignKey(CurriculumVitae, on_delete=models.CASCADE, related_name='workexperience', default=1)
+    curriculum = models.ForeignKey(CurriculumVitae, on_delete=models.CASCADE, related_name='workexperience')
 
 
 class Education(models.Model):
@@ -67,6 +67,6 @@ class Education(models.Model):
     range = models.CharField(max_length=255)
     curse = models.CharField(max_length=255)
     description = models.TextField()
-    curriculum = models.ForeignKey(CurriculumVitae, on_delete=models.CASCADE, related_name='educations', default=1)
+    curriculum = models.ForeignKey(CurriculumVitae, on_delete=models.CASCADE, related_name='educations')
 
 

@@ -8,18 +8,6 @@ class UserListView(View):
         users = CustomUser.objects.all().values()
         return JsonResponse(list(users), safe=False)
 
-#class ValidateTokenView(APIView):
-  # def get(self, request, format=None):
-   #    token_key = request.META.get('HTTP_AUTHORIZATION').split(' ')[0]
-    #   try: 
-     #      token = Token.objects.get(key=token_key)
-     #      return Response({'valid': True}, status=status.HTTP_200_OK)
-     #  except Token.DoesNotExist:
-      #     return Response({
-      #     'token': token.key,
-      # })
-
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth import authenticate

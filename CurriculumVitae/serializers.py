@@ -1,21 +1,20 @@
 from rest_framework import serializers
 from .models import SocialLinks, ContactInfo, CurriculumVitae, Skills, Interests, WorkExperience, Education
 
-class SocialLinksSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SocialLinks
-        fields = '__all__'
-
 class ContactInfoSerializer(serializers.ModelSerializer):
     user_email = serializers.ReadOnlyField(source='user.email')
     user_username = serializers.ReadOnlyField(source='user.username')
     user_firstname = serializers.ReadOnlyField(source='user.firstname')
     user_lastname = serializers.ReadOnlyField(source='user.lastname')
-    sociallinks = SocialLinksSerializer()
 
     class Meta:
         model = ContactInfo
-        fields = ['user', 'phone', 'sociallinks', 'direccion', 'user_email', 'user_username', 'user_firstname', 'user_lastname']
+        fields = ['user', 'phone', 'direccion', 'user_email', 'user_username', 'user_firstname', 'user_lastname']
+
+class SocialLinksSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SocialLinks
+        fields = '__all__'
 
 class CurriculumVitaeSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
