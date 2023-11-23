@@ -2,11 +2,17 @@ from django.http import JsonResponse
 from django.views import View
 from User.models import CustomUser
 from rest_framework.views import APIView
+from django.contrib.auth import get_user_model
 
-class UserListView(View):
-    def get(self, request):
-        users = CustomUser.objects.all().values()
-        return JsonResponse(list(users), safe=False)
+class UserView(View):
+   def get(self, request):
+       if request.user.is_authenticated:
+        user = get_user_model().objects.get(id=request.user.id)
+       users = CustomUser.objects.all().values()
+       permission = "__all__"
+       return JsonResponse(list(users), safe=False)
+
+
 
 from rest_framework.views import APIView
 from rest_framework.response import Response

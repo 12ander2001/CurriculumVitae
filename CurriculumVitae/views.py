@@ -9,7 +9,7 @@ class SocialLinksViewSet(viewsets.ModelViewSet):
     queryset = SocialLinks.objects.all()
     serializer_class = SocialLinksSerializer
     permission = "__all__"
-    
+
 class ContactInfoViewSet(viewsets.ModelViewSet):
    queryset = ContactInfo.objects.all()
    serializer_class = ContactInfoSerializer
@@ -24,20 +24,13 @@ class ContactInfoViewSet(viewsets.ModelViewSet):
     return Response({'id': contact_info.id, 'data': serializer.data}, status=status.HTTP_201_CREATED)
 
    def update(self, request, *args, **kwargs):
-       instance = self.get_object()
-       if request.user != instance.user:
-           return Response(status=status.HTTP_403_FORBIDDEN)
-       serializer = self.get_serializer(instance, data=request.data)
-       serializer.is_valid(raise_exception=True)
-       self.perform_update(serializer)
-       return Response(serializer.data)
-
-   def destroy(self, request, *args, **kwargs):
-       instance = self.get_object()
-       if request.user != instance.user:
-           return Response(status=status.HTTP_403_FORBIDDEN)
-       self.perform_destroy(instance)
-       return Response(status=status.HTTP_204_NO_CONTENT)
+    instance = self.get_object()
+    if request.user != instance.user:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+    serializer = self.get_serializer(instance, data=request.data)
+    serializer.is_valid(raise_exception=True)
+    self.perform_update(serializer)
+    return Response({'id': instance.id, 'data': serializer.data}, status=status.HTTP_200_OK)
 
 class SkillsViewSet(viewsets.ModelViewSet):
     queryset = Skills.objects.all()
@@ -81,11 +74,4 @@ class CurriculumVitaeViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(instance, data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
-        return Response(serializer.data)
-
-    def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-        if request.user != instance.user:
-            return Response(status=status.HTTP_403_FORBIDDEN)
-        self.perform_destroy(instance)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({'id': instance.id, 'data': serializer.data}, status=status.HTTP_200_OK)
