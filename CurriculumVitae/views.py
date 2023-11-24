@@ -4,7 +4,7 @@ from rest_framework import status
 from .models import SocialLinks, ContactInfo, Skills, Interests, WorkExperience, Education, CurriculumVitae
 from .serializers import SocialLinksSerializer, ContactInfoSerializer, SkillsSerializer, InterestsSerializer, WorkExperienceSerializer, EducationSerializer, CurriculumVitaeSerializer
 from django.contrib.auth import get_user_model
-
+       
 class SocialLinksViewSet(viewsets.ModelViewSet):
     queryset = SocialLinks.objects.all()
     serializer_class = SocialLinksSerializer
