@@ -1,0 +1,64 @@
+# Ignorar archivos de configuración local
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignorar archivos generados automáticamente
+db.sqlite3
+*.sqlite3
+*.db
+
+# Ignorar archivos de configuración local
+.env
+
+# Ignorar archivos de entorno virtual
+venv/
+env/
+
+# Ignorar archivos de caché y registros
+.cache/
+logs/
+*.log
+
+# Ignorar archivos de dependencias
+node_modules/
+__pycache__/
+
+# Ignorar archivos de compilación y configuración de IDEs
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.pot
+*.po
+*.mo
+
+# Ignorar archivos de configuración de IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Ignorar archivos de compilación
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.pot
+*.po
+*.mo
+
+# Ignorar archivos temporales
+*.swp
+*~
+*.bak
+*.backup
+
+# Ignorar archivos de configuración local para IDEs
+.vscode/
+.idea/

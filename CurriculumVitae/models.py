@@ -3,8 +3,11 @@ from User.models import CustomUser
 from rest_framework import viewsets
 
 def get_default_user():
-    user = CustomUser.objects.first() 
-    return user.id
+    user = CustomUser.objects.first()
+    if user:
+        return user.id
+    return None  # o el valor que desees usar si no hay usuarios
+
 
 class ContactInfo(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, default=get_default_user)

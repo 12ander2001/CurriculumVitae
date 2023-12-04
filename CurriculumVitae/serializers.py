@@ -9,7 +9,7 @@ class ContactInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ContactInfo
-        fields = ['user', 'phone', 'direccion', 'user_email', 'user_username', 'user_firstname', 'user_lastname']
+        fields = ['id','user', 'phone', 'direccion', 'user_email', 'user_username', 'user_firstname', 'user_lastname']
 
 class SocialLinksSerializer(serializers.ModelSerializer):
     class Meta:
